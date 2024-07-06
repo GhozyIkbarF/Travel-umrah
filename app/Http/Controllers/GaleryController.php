@@ -38,7 +38,7 @@ class GaleryController extends Controller
         if ($request->hasFile('file')) {
             $image = $request->file('file');
             $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . 'webp';
-            $path = public_path('galery/');
+            $path = public_path('img/gallery/');
             ResizeImage::make($image)
                 ->save($path . $imageName, 60);
 
@@ -56,7 +56,7 @@ class GaleryController extends Controller
     public function destroy($id)
     {
         $galery = Galery::find($id);
-        $path = public_path('galery/' . $galery->image);
+        $path = public_path('img/gallery/' . $galery->image);
 
 
         if ($galery) {

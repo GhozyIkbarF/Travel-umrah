@@ -48,7 +48,7 @@
         {{-- section Promo --}}
         <section class="flex flex-col justify-start p-4 rounded-md shadow-lg">
             <div class="mb-3">
-                <form action="{{ route('free-promo.store', $promo_param) }}" method="POST"
+                <form action="{{ route('free-promo.store', 'promo') }}" method="POST"
                     class='w-full lg:w-[400px] flex flex-col md:flex-row gap-2'>
                     @csrf
                     <div>

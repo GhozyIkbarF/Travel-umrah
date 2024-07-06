@@ -13,7 +13,7 @@
                 {{ session('error') }}
             </div>
         @endif
-        <form action="{{ route('package.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('paket.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="flex flex-col gap-2 mb-3">
                 <x-input-label for="name" value="Nama" />

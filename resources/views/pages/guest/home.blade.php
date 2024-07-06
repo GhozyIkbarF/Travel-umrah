@@ -53,9 +53,9 @@
                     keberangkantan umroh Al Ghozy Tour & Travel bersama dengan para jamaah. </p>
                 <div id="lightgallery" class="my-16 flex flex-wrap gap-2 justify-center">
                     @foreach ($galeris as $galeri)
-                        <a data-aos="zoom-in" data-aos-delay="400" href="{{ asset('galery/' . $galeri->image) }}">
+                        <a data-aos="zoom-in" data-aos-delay="400" href="{{ asset('img/gallery/' . $galeri->image) }}">
                             <div class="overflow-hidden img-hover-zoom">
-                                <img src="{{ asset('galery/' . $galeri->image) }}" alt="{{ $galeri->image }}"
+                                <img src="{{ asset('img/gallery/' . $galeri->image) }}" alt="{{ $galeri->image }}"
                                     class="object-cover w-[105px] h-[70px] md:w-[135px] md:h-[100px] lg:w-[210px] lg:h-[136px]">
                             </div>
                         </a>

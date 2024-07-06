@@ -42,22 +42,23 @@ class PackageController extends Controller
     public function paket_umrah($param)
     {
         // Attempt to retrieve data from cache
-        $package = Cache::remember("package_{$param}", now()->addHours(6), function () use ($param) {
+        $package = Cache::remember("package_{$param}", now()->addMinutes(6), function () use ($param) {
             return Package::with('product')
-                ->where('name', '=', $param)
-                ->first();
+            ->where('name', '=', $param)
+            ->first();
         });
-
+        
         // If the package is not found, you might want to handle this case accordingly
         if (!$package) {
             abort(404); // or redirect to a 404 page
         }
+        // dd($param);
 
         // Load relationships for the product
         $package->load('product.relasi_maskapai', 'product.relasi_hotel_makkah', 'product.relasi_hotel_madinah', 'product.free', 'product.promo');
 
         // Attempt to retrieve data from cache
-        $date = Cache::remember("package_{$param}_dates", now()->addHours(6), function () use ($package) {
+        $date = Cache::remember("package_{$param}_dates", now()->addMinutes(6), function () use ($package) {
             return Product::select('date')
                 ->where('is_active', true)
                 ->where('package_id', $package->id)
@@ -65,20 +66,20 @@ class PackageController extends Controller
                 ->get();
         });
 
+        $start_date = date('y-m-d');
+        $end_date = date('y-m-d');
         // If no dates are found, you might want to handle this case accordingly
-        if ($date->isEmpty()) {
-            abort(404); // or redirect to a 404 page
+        if (!$date->isEmpty()) {
+            $start_date = $date[0]->date;
+            $end_date = $date[count($date) - 1]->date;
         }
-
-        $start_date = $date[0]->date;
-        $end_date = $date[count($date) - 1]->date;
 
         // Retrieve products directly from the package (already loaded)
         $products = $package->product;
 
-        return view('pages.guest.package', compact('package', 'products', 'start_date', 'end_date'));
+        return response()->view('pages.guest.package', compact('package', 'products', 'start_date', 'end_date'));
     }
-    
+
     public function create()
     {
         $ListCityTours = ListCityTour::all();
@@ -120,7 +121,7 @@ class PackageController extends Controller
 
         $package->save();
         if ($package) {
-            return redirect('/package')->with('success', 'Package added successfully.');
+            return redirect('/paket')->with('success', 'Package added successfully.');
         }
         return back()->with('error', 'Failed to add package.');
     }
@@ -182,7 +183,7 @@ class PackageController extends Controller
         $package->save();
 
         if ($package) {
-            return redirect('/package')->with('success', 'Package added successfully.');
+            return redirect('/paket')->with('success', 'Package added successfully.');
         }
         return back()->with('error', 'Failed to add package.');
     }

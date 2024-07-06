@@ -6,6 +6,7 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image as ResizeImage;
 
 class TestimonialController extends Controller
 {
@@ -30,8 +31,10 @@ class TestimonialController extends Controller
         $imageName = '';
         if($request->hasFile('image')){
             $image = $request->file('image');
-            $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME). time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('testimonial'), $imageName);
+            $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME). time() . '.' . 'webp';
+            $path = public_path('testimonial/');
+            ResizeImage::make($image)
+            ->save($path . $imageName, 60);
         }
         $testimoni->image = $imageName;
 
@@ -63,14 +66,16 @@ class TestimonialController extends Controller
         $imageName = $testimonial->image;
         if($request->hasFile('image')){
             $image = $request->file('image');
-            $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME). time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('testimonial'), $imageName);
+            $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME). time() . '.' . 'webp';
+            $path = public_path('testimonial/');
+            ResizeImage::make($image)
+            ->save($path . $imageName, 60);
 
 
-            $path = public_path('testimonial/' . $testimonial->image);
+            $path_remove = public_path('testimonial/' . $testimonial->image);
             if($testimonial){
-                if (File::exists($path)) {
-                    File::delete($path);
+                if (File::exists($path_remove)) {
+                    File::delete($path_remove);
                 } 
         }
             $testimonial->image = $imageName;

@@ -36,7 +36,7 @@
                         <td>{{ $package->city_tour }}</td>
                         <td>{{ $package->is_plus }}</td>
                         <td>
-                            <a href="{{ route('package.edit', $package->id) }}" id="edit-package"
+                            <a href="{{ route('paket.edit', $package->id) }}" id="edit-package"
                                 data-edit="{{ json_encode($package) }}" data-route="{{ route('package.update', $package->id) }}"
                                 data-modal-target="crud-modal" data-modal-toggle="crud-modal">
                                 <x-secondary-button>
@@ -44,7 +44,7 @@
                                 </x-secondary-button>
                             </a>
                             <x-danger-button type='button' class="delete-button mt-2" data-modal-target="modal-delete" data-modal-toggle="modal-delete"
-                                data-delete-link="{{ route('package.destroy', $package->id) }}">
+                                data-delete-link="{{ route('paket.destroy', $package->id) }}">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </x-danger-button>
                         </td>

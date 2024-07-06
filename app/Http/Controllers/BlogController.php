@@ -28,7 +28,7 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg', 
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp', 
         ]);
         $blog = new Blog;
         
@@ -59,7 +59,7 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg', 
+            'image' => 'image|mimes:jpeg,png,jpg,webp', 
         ]);
 
         $blog = Blog::find($id);

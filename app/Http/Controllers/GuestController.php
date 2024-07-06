@@ -40,7 +40,6 @@ class GuestController extends Controller
 
     // Convert the array to a comma-separated string
     $monthsString = implode(',', $monthsArray);
-
     // Attempt to retrieve data from cache
     $program_umrahs = Cache::remember('program_umrahs', now()->addMinutes(5), function () use ($monthsString) {
         return Product::with(['relasi_maskapai', 'relasi_hotel_makkah', 'relasi_hotel_madinah', 'package'])->whereRaw("MONTH(date) IN ($monthsString)")->get();

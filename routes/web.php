@@ -106,12 +106,13 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // package
-    Route::get('/paket', [PackageController::class, 'index'])->name('package.index');
+    // Route::get('/paket', [PackageController::class, 'index'])->name('package.index');
     Route::get('/paket-create', [PackageController::class, "create"])->name('package.create');
-    Route::post('/paket', [PackageController::class, 'store'])->name('package.store');
-    Route::get('/paket/{id}/edit', [PackageController::class, 'edit'])->name('package.edit');
+    // Route::post('/paket', [PackageController::class, 'store'])->name('package.store');
+    // Route::get('/paket/{id}/edit', [PackageController::class, 'edit'])->name('package.edit');
     Route::post('/paket/{id}/update', [PackageController::class, 'update'])->name('package.update');
-    Route::delete('/paket/{id}/delete', [PackageController::class, 'destroy'])->name('package.destroy');
+    // Route::delete('/paket/{id}/delete', [PackageController::class, 'destroy'])->name('package.destroy');
+    Route::resource('paket', PackageController::class)->except(['create', 'update']);
 
     // free-promo
     Route::get('/free-promo', [FreePromoController::class, 'index'])->name('free-promo.index');

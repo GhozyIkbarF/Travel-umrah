@@ -92,9 +92,9 @@
         </div>
             <div id="lightgallery" class="my-16 flex flex-wrap gap-2">
                 @foreach ($images as $image)
-                    <a href="{{ asset('galery/' . $image->image) }}">
+                    <a href="{{ asset('img/gallery/' . $image->image) }}">
                         <div class="relative overflow-hidden img-hover-zoom">
-                            <img src="{{ asset('galery/' . $image->image) }}"
+                            <img src="{{ asset('img/gallery/' . $image->image) }}"
                                 alt="{{ $image->image }}" class="object-cover w-[105px] h-[70px] md:w-[135px] md:h-[100px] lg:w-[220px] lg:h-[146px]">
                                 <div class="absolute top-[5px] right-[5px]">
                                     <button type="button" data-modal-target="modal-delete" data-modal-toggle="modal-delete"
